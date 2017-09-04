@@ -26,18 +26,23 @@ class MapReduce(object):
             new = dict.__new__(cls, initializer)
             new.lock = threading.Lock()
             return new
+
         def __contains__(self, k):
             with self.lock:
                 return dict.__contains__(self, k)
+
         def __getitem__(self, k):
             with self.lock:
                 return dict.__getitem__(self, k)
+
         def __setitem__(self, k, v):
             with self.lock:
                 dict.__setitem__(self, k, v)
+
         def append(self, k, v): # for thread-safe list append
             with self.lock:
                 dict.__getitem__(self, k).append(v)
+
         def items(self):
             with self.lock:
                 return dict.items(self)
@@ -66,6 +71,7 @@ class MapReduce(object):
         output_queue = Queue()
         if fn_selector == 'merge':
             merge_dict = self.SynchronizedDict()
+
         def worker():
             while not input_queue.empty():
                 (k, v) = input_queue.get()
@@ -91,17 +97,8 @@ class MapReduce(object):
             output_queue = self.create_queue(output_list)
         return output_queue
 
-    # def output_fn(self, output_list): # just print the resulting list
-    #     print("Word".ljust(15), "Count".rjust(5))
-    #     print("______________".ljust(15), "_____".rjust(5))
-    #     sorted_list = sorted(output_list, key=operator.itemgetter(1), reverse=True)
-    #     for (word, count) in sorted_list:
-    #         if int(count, 10) > self.min_count:
-    #             print(word.ljust(15), repr(count).rjust(5))
-    #     print('')
-
     def map_reduce(self): # the actual map-reduce algoritm
-        data_list = self.split_fn(self.data)
+        data_list = self.split_fn(self.data)    # defined in caller
         data_queue = self.create_queue(data_list) # enqueue the data so we can multi-process
         map_queue = self.process_queue(data_queue, 'map') # [(k,v),...] => [(k,v1),(k,v2),...]
         merge_queue = self.process_queue(map_queue, 'merge') # [(k,v1),(k,v2),...] => [(k,[v1,v2,...]),...]
