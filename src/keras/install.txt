@@ -1,0 +1,45 @@
+# https://keras.io/
+!pip install -q keras
+import keras
+
+# To determine which version you're using:
+!pip show tensorflow
+
+# For the current version:
+!pip install --upgrade tensorflow
+
+# For a specific version:
+!pip install tensorflow==1.2
+
+# For the latest nightly build:
+!pip install tf-nightly
+
+!pip install -q matplotlib-venn
+
+# http://pytorch.org/
+from os import path
+from wheel.pep425tags import get_abbr_impl, get_impl_ver, get_abi_tag
+platform = '{}{}-{}'.format(get_abbr_impl(), get_impl_ver(), get_abi_tag())
+
+accelerator = 'cu80' if path.exists('/opt/bin/nvidia-smi') else 'cpu'
+
+!pip install -q http://download.pytorch.org/whl/{accelerator}/torch-0.3.0.post4-{platform}-linux_x86_64.whl torchvision
+import torch
+
+# https://pypi.python.org/pypi/libarchive
+!apt-get -qq install -y libarchive-dev && pip install -q -U libarchive
+import libarchive
+
+# https://pypi.python.org/pypi/pydot
+!apt-get -qq install -y graphviz && pip install -q pydot
+import pydot
+
+# https://github.com/dmlc/xgboost
+# This specific version is a work-around for a build issue in newer versions.
+!pip install -q xgboost==0.4a30
+import xgboost
+
+# https://github.com/dmlc/xgboost
+# This specific version is a work-around for a build issue in newer versions.
+!pip install -q xgboost==0.4a30
+import xgboost
