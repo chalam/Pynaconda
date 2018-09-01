@@ -1,7 +1,7 @@
 # import heapq
 from queue import Queue
 from src.graph.implementation import *
-
+from src.data_structures.stack import Stack
 class SimpleGraph:
     def __init__(self):
         self.edges = {}
@@ -11,20 +11,6 @@ class SimpleGraph:
 
     def cost(self, from_node, to_node):
         return 1
-
-# import collections
-# class Queue:
-#     def __init__(self):
-#         self.elements = collections.deque()
-#
-#     def empty(self):
-#         return len(self.elements) == 0
-#
-#     def put(self, x):
-#         self.elements.append(x)
-#
-#     def get(self):
-#         return self.elements.popleft()
 
 class PriorityQueue:
     def __init__(self):
@@ -38,6 +24,18 @@ class PriorityQueue:
 
     def get(self):
         return heapq.heappop(self.elements)[1]
+
+def dfs(graph, start, goal):
+    frontier = Stack()
+    frontier.push(start)
+    came_from = {start: None}
+    while not frontier.empty():
+        current = frontier.pop()
+        for next in graph.neighbors(current):
+            if next not in came_from:
+                frontier.push(next)
+                came_from[next] = current
+    return came_from
 
 def bfs(graph, start, goal):
     frontier = Queue()
@@ -137,14 +135,18 @@ def a_star(graph, start, goal):
 
 if __name__ == '__main__':
     g = SimpleGraph()
-    g.edges = {'A': ['B'],
-               'B': ['A', 'C', 'D'],
-               'C': ['A'],
-               'D': ['E', 'A'],
-               'E': ['B']}
+    g.edges = {'A': ['B', 'C'],
+             'B': ['A', 'D', 'E'],
+             'C': ['A', 'F'],
+             'D': ['B'],
+             'E': ['B', 'F'],
+             'F': ['C', 'E']}
+
+    paths = dfs(g, 'A', None)
+    print('dfs', path_from(paths, 'A', 'E'))
     paths = bfs(g, 'A', None)
-    print('bfs', path_from(paths, 'A', 'D'))
-    paths = a_star(g, 'A', 'D')
-    print('a_star', path_from(paths, 'A', 'D'))
-    paths = dijkstra(g, 'A', 'D')
-    print('dijkstra', path_from(paths, 'A', 'D'))
+    print('bfs', path_from(paths, 'A', 'E'))
+    paths = a_star(g, 'A', 'E')
+    print('a_star', path_from(paths, 'A', 'E'))
+    paths = dijkstra(g, 'A', 'E')
+    print('dijkstra', path_from(paths, 'A', 'E'))
