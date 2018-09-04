@@ -3,12 +3,14 @@
 
 class Node():
     def __init__(self):
-        # Note that using dictionary for children (as in this implementation) would not allow lexicographic sorting mentioned in the next section (Sorting),
+        # Note that using dictionary for children (as in this implementation) would not
+        # allow lexicographic sorting mentioned in the next section (Sorting),
         # because ordinary dictionary would not preserve the order of the keys
         self.children = {}  # mapping from character ==> Node
         self.value = None
 
-    def find(node, key):
+    def find(root, key):
+        node = root
         for char in key:
             if char in node.children:
                 node = node.children[char]
@@ -36,7 +38,10 @@ class Node():
         node.value = value
 
     def __repr__(self) -> str:
-        return '%s: %s' % (self.children, self.value)
+        return '[%s: %s]' % (self.value, self.children)
+
+    def __str__(self) -> str:
+        return '[%s: %s]' % (self.value, self.children)
 
 
 if __name__ == '__main__':
