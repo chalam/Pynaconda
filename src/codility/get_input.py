@@ -1,0 +1,6 @@
+a = int(input().rstrip())
+b = input().rstrip()
+c = float(input().rstrip())
+arr = list(map(int, input().rstrip().split()))
+print('\n%d %s %f' % (a, b, c))
+print('\n%s' % arr)
