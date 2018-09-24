@@ -1,3 +1,5 @@
+import operator
+
 import numpy as np
 import random
 
@@ -19,3 +21,9 @@ def make_arrary(length=10, N=100, negatives=False):
         return [random.randint(N * -1, N) for i in range(length)]
     else:
         return [random.randint(0, N) for i in range(length)]
+
+def sort_by_col(table, col=0):
+    '''
+    http://www.saltycrane.com/blog/2007/12/how-to-sort-table-by-columns-in-python/
+    '''
+    return sorted(table, key=operator.itemgetter(col))
