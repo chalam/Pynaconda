@@ -1,4 +1,4 @@
-import heapq
+# MLP
 
 def find_lower_or_equal(prices, start, m):
     for i in range(start, len(prices)):
@@ -8,7 +8,8 @@ def find_lower_or_equal(prices, start, m):
 
 def finalPrice(prices):
     """
-        find the lower ar equal and discount it
+        prices are discounted by the next lowest
+        or equal and discount it
         O(N^2)
     :param prices:
     :return:

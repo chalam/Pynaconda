@@ -1,5 +1,5 @@
 import sys
-
+# MLP
 
 def maximize_buy_low_sell_high(prices):
     min_price = sys.maxsize
@@ -59,15 +59,32 @@ def trade_buy_sell(prices, n, dp):
     return pnl
 
 
+def maximize_profit2(prices, n):
+    """
+        find the max price so far from the end
+        profit is the diff of current price and max price so far
+        aggregate profit
+    :param prices:
+    :param n:
+    :return:
+    """
+    profit = 0
+    max_price = 0
+    for i in range(n-1, -1, -1):
+        max_price = max(prices[i], max_price)
+        profit += max_price - prices[i]
+        print(i, prices[i], max_price, profit)
+    return profit
 
-
-# assert maximize_profit([5, 3, 2]) == 0
-# assert maximize_profit([1, 2, 100]) == 197
-# assert maximize_profit([1, 3, 1, 2]) == 4
 
 assert maximize_profit([5, 3, 2], 3) == 0
 assert maximize_profit([1, 2, 100], 3) == 197
 assert maximize_profit([1, 3, 1, 2], 4) == 3
+
+assert maximize_profit2([5, 3, 2], 3) == 0
+assert maximize_profit2([1, 2, 100], 3) == 197
+assert maximize_profit2([1, 3, 1, 2], 4) == 3
+assert maximize_profit2([5, 4, 3, 4, 5], 5) == 4
 
 # long int **J;
 #

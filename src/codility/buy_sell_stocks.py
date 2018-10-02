@@ -1,6 +1,7 @@
 import sys
 from src.data_structures.utils import make_arrary
 
+
 def maximize_buy_low_sell_high(prices):
     min_price = sys.maxsize
     max_profit = 0

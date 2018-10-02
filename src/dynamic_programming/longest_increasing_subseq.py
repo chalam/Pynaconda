@@ -12,11 +12,13 @@ def long_inc_subseq(a):
     # O(N^2)
 
     n = len(a)
-    lis = [1] * n
+    lis = [1] * n   # seq of self length = 1
     for i in range(1, n):       # 1 to n-1
         for j in range(0, i):   # 0 to i-1
-            if a[i] > a[j] and lis[i] < lis[j]+1:
-                lis[i] = lis[j]+1
+            # if a[i] > a[j] and lis[i] < lis[j]+1:
+            #     lis[i] = lis[j]+1
+            if a[j] < a[i]:   # same as above
+                lis[i] = max(lis[i], lis[j]+1)
     return max(lis), lis
 
 def long_inc_subseq_optimized(X):
@@ -57,25 +59,27 @@ def long_inc_subseq_optimized(X):
     return L, S
 
 
+a = [11, 14, 13, 7, 8, 15]
+max_lis, lis = long_inc_subseq(a)
+print('max_lis', max_lis, 'lis', lis)
+assert max_lis == 3
 
+a = [10, 22, 9, 33, 21, 50, 41, 60]
+max_lis, lis = long_inc_subseq(a)
+print('max_lis', max_lis, 'lis', lis)
+assert max_lis == 5
 
-
-# a = [11, 14, 13, 7, 8, 15]
-# max_lis, lis = long_inc_subseq(a)
-# print('max_lis', max_lis, 'lis', lis)
-# assert max_lis == 3
-#
-# a = [10, 22, 9, 33, 21, 50, 41, 60]
-# max_lis, lis = long_inc_subseq(a)
-# print('max_lis', max_lis, 'lis', lis)
-# assert max_lis == 5
-#
-# a = [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15]
-# max_lis, lis = long_inc_subseq(a)
-# print('max_lis', max_lis, 'lis', lis)
-# assert max_lis == 6
+a = [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15]
+max_lis, lis = long_inc_subseq(a)
+print('max_lis', max_lis, 'lis', lis)
+assert max_lis == 6
 
 a = [10, 22, 9, 33, 21, 50, 41, 60]
 max_lis, lis = long_inc_subseq_optimized(a)
 print('max_lis', max_lis, 'lis', lis)
 assert max_lis == 5
+
+a = [6, 2, 5, 1, 7, 4, 8, 3]
+max_lis, lis = long_inc_subseq(a)
+print('max_lis', max_lis, 'lis', lis)
+assert max_lis == 4
