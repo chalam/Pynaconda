@@ -1,5 +1,5 @@
 from unittest import TestCase
-import matrices
+from src.linear_algebra import matrices
 
 
 class TestVector(TestCase):

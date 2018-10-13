@@ -1,3 +1,5 @@
+# https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-172-performance-engineering-of-software-systems-fall-2010/video-lectures/lecture-2-bit-hacks/
+
 def count_bits(n):
     nbits = 0
     while n > 0:

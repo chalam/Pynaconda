@@ -37,11 +37,17 @@
 
 
 from copy import deepcopy
-m, n, r = map(int, input().split())
-matrix = []
+# m, n, r = map(int, input().split())
+
+m, n, r = 5, 5, 3
+# matrix = []
+# for i in range(m):
+#     # matrix.append(map(int, input().rstrip().split()))
+#     matrix.append(list(map(int, input().rstrip().split())))
+matrix = [[(i*n)+j for j in range(n)] for i in range(m)]
 for i in range(m):
-    # matrix.append(map(int, input().rstrip().split()))
-    matrix.append(list(map(int, input().rstrip().split())))
+    print(' '.join(map(str, matrix[i])))
+
 k = min(m, n) // 2
 rows = []
 for ii in range(k):
@@ -78,5 +84,6 @@ for ii in range(k):
         result[ii][i] = row[idx]
         idx += 1
         idx %= len(row)
+print('rotated')
 for i in result:
     print( " ".join(map(str, i)))

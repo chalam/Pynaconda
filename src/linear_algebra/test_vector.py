@@ -1,6 +1,5 @@
 from unittest import TestCase
-import vectors
-
+from src.linear_algebra import vectors
 
 class TestVector(TestCase):
     def test_vector_add(self):

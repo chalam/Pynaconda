@@ -9,7 +9,7 @@ def primeFactors(n):
     # Print the number of two's that divide n
     while n % 2 == 0:
         print(2)
-        n = n / 2
+        n /= 2
 
     # n must be odd at this point
     # so a skip of 2 ( i = i + 2) can be used
@@ -18,7 +18,7 @@ def primeFactors(n):
         # while i divides n , print i and divide n
         while n % i == 0:
             print(i)
-            n = n / i
+            n /= i
 
             # Condition if n is a prime
 
@@ -26,8 +26,6 @@ def primeFactors(n):
     if n > 2:
         print(n)
 
-    # Driver Program to test above function
-
-
+# Driver Program to test above function
 n = 315
 primeFactors(n)
